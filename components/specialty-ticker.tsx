@@ -5,11 +5,11 @@ export default function SpecialtyTicker() {
   return (
     <div
       aria-label={specialties}
-      className="flex h-[30px] items-center overflow-hidden border-b border-[#e8e1da] bg-paper text-[6px] uppercase tracking-[1.7px] text-clay md:h-7"
+      className="flex h-10 items-center overflow-hidden border-b border-[#e8e1da] bg-paper text-xs uppercase tracking-[0.15em] text-clay"
     >
-      <div className="flex w-max whitespace-nowrap" aria-hidden="true">
-        {Array.from({ length: 6 }, (_, index) => (
-          <span className="pr-9" key={index}>
+      <div className="ticker-track flex w-max whitespace-nowrap" aria-hidden="true">
+        {Array.from({ length: 12 }, (_, index) => (
+          <span className="pr-10" key={index}>
             {specialties}
           </span>
         ))}
