@@ -8,7 +8,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Home | Godfrey Osaki Studios",
+  title: "Home - Godfrey Osaki Studios",
   description: "Wedding and Portrait Photographers",
 };
 
