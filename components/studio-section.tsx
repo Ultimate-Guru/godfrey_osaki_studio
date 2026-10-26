@@ -5,29 +5,43 @@ const collections: Collection[] = [
   {
     title: "Family",
     number: "01",
-    image: "/family_1.jpg",
+    image: "/family.jpg",
     desktopPosition: "md:col-start-2 md:row-start-1",
   },
   {
-    title: "Male",
+    title: "Baby",
     number: "02",
-    image: "/boy_1.jpg",
-    imagePosition: "object-[54%_30%]",
+    image: "/baby.jpg",
+    imagePosition: "object-[50%_30%]",
     desktopPosition: "md:col-start-3 md:row-start-1 md:mt-[25px]",
   },
   {
-    title: "Female",
+    title: "Male",
     number: "03",
-    image: "/girl_1.jpg",
-    imagePosition: "object-[55%_68%]",
+    image: "/boy.jpg",
+    imagePosition: "object-[54%_30%]",
     desktopPosition: "md:col-start-2 md:row-start-2",
   },
   {
-    title: "Marriage",
+    title: "Female",
     number: "04",
-    image: "/marry_1.jpg",
+    image: "/girl.jpg",
+    imagePosition: "object-[55%_68%]",
     desktopPosition: "md:col-start-3 md:row-start-2 md:mt-[25px]",
   },
+  {
+    title: "Marriage",
+    number: "05",
+    image: "/marry.jpg",
+    desktopPosition: "md:col-start-2 md:row-start-3",
+  },
+  {
+    title: "Maternity",
+    number: "06",
+    image: "/maternity.jpg",
+    imagePosition: "object-[50%_30%]",
+    desktopPosition: "md:col-start-3 md:row-start-3 md:mt-[25px]",
+  }
 ];
 
 export default function StudioSection() {
@@ -38,7 +52,7 @@ export default function StudioSection() {
       id="portfolio"
     >
       <div
-        className="col-span-2 pb-1 md:col-span-1 md:row-span-2 md:pb-0 md:pr-5"
+        className="col-span-2 pb-1 md:col-span-1 md:row-span-3 md:pb-0 md:pr-5"
         id="about"
       >
         <p className="mb-5 text-xs uppercase tracking-[0.18em] text-clay">

@@ -1,5 +1,5 @@
 const specialties =
-  "Weddings · Portraits · Unscripted family stories · Lagos & beyond";
+  "Weddings · Portraits · Maternity · Graduation · Marriage · Unscripted family stories · Lagos & beyond";
 
 export default function SpecialtyTicker() {
   return (
