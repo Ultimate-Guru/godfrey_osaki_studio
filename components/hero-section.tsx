@@ -1,81 +1,146 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-[610px] h-[84svh] max-h-[790px] flex-col justify-between overflow-hidden bg-[#344d42] text-white md:min-h-[420px] md:h-[min(760px,52vw)]"
+      className="relative isolate flex min-h-152.5 h-[84svh] max-h-197.5 flex-col justify-between overflow-hidden bg-[#344d42] text-white md:min-h-105 md:h-[min(760px,52vw)]"
     >
+      {/* Background Image */}
       <Image
         src="/hero.jpg"
         alt="A bride in a flowing green gown"
         fill
         priority
+        quality={90}
         sizes="100vw"
-        className="absolute inset-0 -z-20 object-cover object-[55%_center] md:object-[center_34%]"
+        className="absolute inset-0 -z-20 object-cover object-center md:object-[center_45%]"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/30 via-black/5 to-black/55 md:bg-gradient-to-r md:from-black/55 md:via-black/10 md:to-black/20" />
 
-      <header className="grid grid-cols-[1fr_auto] items-start gap-x-5 gap-y-4 px-[6vw] pt-5 md:grid-cols-[1fr_auto_1fr] md:px-[4vw]">
-        <a
-          className="flex w-fit flex-col font-serif text-[22px] leading-[0.94] tracking-[-1.2px]"
-          href="#top"
-          aria-label="Godfrey Osaki Studios home"
-        >
-          <span>Godfrey Osaki</span>
-          <span className="mt-[5px] text-center font-sans text-[6px] tracking-[4px]">
-            STUDIOS
-          </span>
-        </a>
+      {/* Background Overlay */}
+      <div className="absolute inset-0 -z-10 bg-linear-to-b from-black/45 via-black/10 to-black/60 md:bg-linear-to-r md:from-black/60 md:via-black/15 md:to-black/25" />
 
+      {/* Navbar */}
+      <header className="relative z-10 w-full px-[6vw] py-5 sm:py-6 md:px-[4vw] md:py-7">
+        <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 md:grid-cols-[1fr_auto_1fr] md:gap-x-8">
+
+          {/* Logo */}
+          <Link
+            href="/"
+            aria-label="Godfrey Osaki Studios homepage"
+            className="relative flex h-12 w-40 items-center sm:h-14 sm:w-48 md:h-14 md:w-52 lg:w-56"
+          >
+            <Image
+              src="/logo2.png"
+              alt="Godfrey Osaki Studios"
+              width={205}
+              height={100}
+              priority
+              sizes="(max-width: 767px) 192px, 224px"
+              className="object-contain object-left"
+            />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav
+            aria-label="Main navigation"
+            className="hidden items-center justify-center gap-6 whitespace-nowrap text-sm font-medium uppercase tracking-[0.16em] lg:gap-8 md:flex"
+          >
+            <Link
+              href="/about"
+              className="transition-opacity duration-300 hover:opacity-60"
+            >
+              About
+            </Link>
+
+            <Link
+              href="/portfolio"
+              className="transition-opacity duration-300 hover:opacity-60"
+            >
+              Portfolio
+            </Link>
+
+            <Link
+              href="/contact"
+              className="transition-opacity duration-300 hover:opacity-60"
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Location Information */}
+          <div className="justify-self-end text-right">
+            <p className="text-xs font-medium uppercase tracking-[0.14em] sm:text-[10px] md:text-sm">
+              Lagos · Nigeria
+            </p>
+
+            <span className="mt-1 block text-[11px] tracking-[0.18em] opacity-75">
+              Est. 2020
+            </span>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
         <nav
-          aria-label="Main navigation"
-          className="flex gap-2.5 pt-1.5 text-[6px] uppercase tracking-[0.8px] sm:gap-[15px] sm:text-[7px] md:gap-[clamp(18px,3vw,46px)] md:pt-[5px] md:text-[8px] md:tracking-[1.3px]"
+          aria-label="Mobile navigation"
+          className="mt-5 flex items-center justify-between border-t border-white/20 pt-4 text-[10px] font-medium uppercase tracking-[0.16em] md:hidden"
         >
-          <a className="transition-opacity hover:opacity-65" href="#portfolio">
-            Portfolio
-          </a>
-          <a className="transition-opacity hover:opacity-65" href="#about">
+          <Link
+            href="/about"
+            className="transition-opacity duration-300 hover:opacity-60"
+          >
             About
-          </a>
-          <a className="transition-opacity hover:opacity-65" href="#contact">
-            Contact
-          </a>
-        </nav>
+          </Link>
 
-        <p className="col-start-2 row-start-2 m-0 text-right text-[7px] uppercase tracking-[1.3px] md:col-start-3 md:row-start-1 md:mt-[3px]">
-          Lagos · Nigeria
-          <span className="mt-1.5 block text-[6px] tracking-[1.6px]">
-            Est. 2020
-          </span>
-        </p>
+          <Link
+            href="/portfolio"
+            className="transition-opacity duration-300 hover:opacity-60"
+          >
+            Portfolio
+          </Link>
+
+          <Link
+            href="/contact"
+            className="transition-opacity duration-300 hover:opacity-60"
+          >
+            Contact
+          </Link>
+        </nav>
       </header>
 
-      <div className="flex flex-col items-start justify-between gap-6 px-[6vw] pb-8 md:flex-row md:items-end md:gap-8 md:px-[3.2vw] md:pb-[34px]">
+      {/* Hero Content */}
+      <div className="flex flex-col items-start justify-between gap-6 px-[6vw] pb-10 md:flex-row md:items-end md:gap-8 md:px-[3.2vw] md:pb-9">
+
+        {/* Main Heading */}
         <div>
-          <p className="mb-3 text-[7px] uppercase tracking-[1.8px]">
+          <p className="mb-3 text-xs uppercase tracking-[0.18em]">
             Godfrey Osaki Studios / 01
           </p>
+
           <h1
             id="hero-title"
-            className="flex flex-col text-[clamp(48px,12vw,82px)] font-medium leading-[0.82] tracking-[-0.09em] md:text-[clamp(54px,8vw,116px)]"
+            className="flex flex-col text-[clamp(48px,12vw,82px)] font-medium leading-[0.9] tracking-[-0.06em] md:text-[clamp(54px,8vw,116px)]"
           >
             <span>Not posed.</span>
-            <span className="mt-2 text-sand">Remembered.</span>
+            <span className="mb-1 text-sand">Remembered.</span>
           </h1>
         </div>
 
-        <div className="ml-auto w-[min(230px,75%)] text-[10px] leading-[1.65] md:mb-1 md:mr-[12%] md:w-[min(185px,23%)] md:text-[9px]">
+        {/* Description and CTA */}
+        <div className="w-full max-w-xs text-sm leading-relaxed md:mb-1 md:mr-[8%] md:ml-auto md:w-[min(260px,28%)] md:max-w-none md:text-base">
           <p className="mb-5">
             Photography for the days you want to keep feeling — not just keep
             looking at.
           </p>
-          <a
-            className="inline-flex items-center gap-3 text-[7px] font-bold uppercase tracking-[1.2px] transition-opacity hover:opacity-65"
-            href="#portfolio"
+
+          <Link
+            href="/portfolio"
+            className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.15em] transition-opacity hover:opacity-65"
           >
-            Enter the archive <span aria-hidden="true">↘</span>
-          </a>
+            Enter the archive
+            <span aria-hidden="true">↘</span>
+          </Link>
         </div>
       </div>
     </section>

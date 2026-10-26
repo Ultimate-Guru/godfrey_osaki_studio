@@ -70,7 +70,7 @@ export default function ContactSection() {
     return (
         <section
             aria-labelledby="contact-title"
-            className="mx-auto max-w-5xl px-[6vw] pb-20 pt-8 md:px-8 md:pb-28 md:pt-14"
+            className="mx-auto max-w-5xl px-[6vw] pb-20 pt-16 md:px-8 md:pb-28 md:pt-24"
         >
             <h1
                 id="contact-title"

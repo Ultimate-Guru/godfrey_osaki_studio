@@ -5,7 +5,7 @@ export default function AboutSection() {
     return (
         <section
             aria-labelledby="about-title"
-            className="mx-auto grid max-w-5xl items-center gap-10 px-[6vw] py-12 md:grid-cols-[minmax(0,440px)_1fr] md:gap-12 md:px-8 md:py-24"
+            className="mx-auto grid max-w-5xl items-center gap-10 px-[6vw] py-20 md:grid-cols-[minmax(0,440px)_1fr] md:gap-12 md:px-14 md:py-20"
         >
             <div className="relative aspect-[0.8] w-full overflow-hidden bg-[#8a5a48]">
                 <Image

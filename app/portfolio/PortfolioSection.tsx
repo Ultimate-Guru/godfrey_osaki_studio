@@ -76,7 +76,7 @@ export default function PortfolioSection() {
     return (
         <section
             aria-labelledby="archive-title"
-            className="px-[6vw] pb-20 pt-8 md:px-[3.2vw] md:pb-28 md:pt-12"
+            className="px-[6vw] pb-20 pt-20 md:px-[3.2vw] md:pb-28 md:pt-20"
         >
             <p className="mb-5 text-xs uppercase tracking-[0.18em] text-[#6b1423]">
                 The archive / 03
