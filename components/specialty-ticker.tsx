@@ -1,11 +1,11 @@
 const specialties =
-  "Weddings · Portraits · Maternity · Graduation · Marriage · Unscripted family stories · Lagos & beyond";
+  "Weddings · Portraits · Maternity · Unscripted family stories · Lagos & beyond";
 
 export default function SpecialtyTicker() {
   return (
     <div
       aria-label={specialties}
-      className="flex h-10 items-center overflow-hidden border-b border-[#e8e1da] bg-paper text-xs uppercase tracking-[0.15em] text-clay"
+      className="theme-border flex h-14 items-center overflow-hidden border-b bg-paper text-sm font-bold uppercase tracking-[0.15em] text-clay"
     >
       <div className="ticker-track flex w-max whitespace-nowrap" aria-hidden="true">
         {Array.from({ length: 12 }, (_, index) => (

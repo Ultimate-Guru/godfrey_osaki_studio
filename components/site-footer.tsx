@@ -133,19 +133,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col gap-4 py-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-
-          <p className="text-xs leading-6 text-[#aaa197]">
+        <div className="flex flex-col gap-3 border-t border-[#f8f4ee]/20 py-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+          <p className="text-sm font-medium leading-6 text-[#e3ddd5]">
             &copy; 2026 Godfrey Osaki Studios. All rights reserved.
           </p>
 
-          <p className="text-xs leading-6 text-[#aaa197]">
+          <p className="text-sm font-medium leading-6 text-[#e3ddd5]">
             Designed by{" "}
             <Link
               href="https://oluwatosindaniel.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#e3ddd5] underline decoration-[#c18b72]/70 underline-offset-4 transition-colors duration-300 hover:text-[#c18b72]"
+              className="font-semibold text-white underline decoration-[#c18b72] underline-offset-4 transition-colors duration-300 hover:text-[#c18b72]"
             >
               Oluwatosin
             </Link>

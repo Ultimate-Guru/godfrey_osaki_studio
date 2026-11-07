@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <main id="top" className="flex min-h-screen flex-col overflow-x-hidden bg-[#faf8f4]">
+    <main id="top" className="theme-bg theme-fg flex min-h-screen flex-col overflow-x-hidden">
       <SiteHeader />
       <ContactSection />
       <SiteFooter />

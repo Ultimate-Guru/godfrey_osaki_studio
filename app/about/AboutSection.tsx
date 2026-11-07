@@ -21,16 +21,16 @@ export default function AboutSection() {
             <div className="max-w-md">
                 <h1
                     id="about-title"
-                    className="mb-8 text-[clamp(36px,5vw,52px)] font-light leading-[1.2] tracking-tight text-[#1d1a19]"
+                    className="theme-fg mb-8 text-[clamp(36px,5vw,52px)] font-light leading-[1.2] tracking-tight"
                 >
                     The faces behind the pictures
                 </h1>
 
-                <p className="mb-5 text-[15px] leading-7 text-[#2b2623]">
+                <p className="theme-muted mb-5 text-[15px] leading-7">
                     We are Emmanuel and Onella, the couple photographers side by side for just as long. 
                     Working as a team means you get two sets of eyes on every moment.
                 </p>
-                <p className="mb-8 text-[15px] leading-7 text-[#2b2623]">
+                <p className="theme-muted mb-8 text-[15px] leading-7">
                     For us, a photograph is more than a good image. It is a moment that lasts. 
                     We take time to know you, so the people in the frame look like
                     themselves, relaxed and smiling.

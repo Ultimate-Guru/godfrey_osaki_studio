@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import SiteFooter from "@/components/site-footer";
 import SiteHeader from "../about/SiteHeader";
 import PortfolioSection from "./PortfolioSection";
+import PricingSection from "@/components/pricing-section";
 
 export const metadata: Metadata = {
     title: "Portfolio - Godfrey Osaki Studios",
@@ -10,9 +11,10 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
     return (
-        <main id="top" className="min-h-screen overflow-x-hidden bg-[#faf8f4]">
+        <main id="top" className="theme-bg theme-fg min-h-screen overflow-x-hidden">
             <SiteHeader />
             <PortfolioSection />
+            <PricingSection showDescriptions />
             <SiteFooter />
         </main>
     );

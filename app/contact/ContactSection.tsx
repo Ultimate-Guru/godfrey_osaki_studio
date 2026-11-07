@@ -3,19 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
+import { formatPackageOption, photographyPackages } from "@/components/pricing-data";
 
 const WHATSAPP_NUMBER = "2349038829347";
 const WHATSAPP_DISPLAY = "+234 903 882 9347";
 const EMAIL = "info.gopstudios@gmail.com";
 
 const shootTypes = [
-    "Family",
-    "Male",
-    "Female",
-    "Marriage",
-    "Birthday",
+    "Weddings",
+    "Portraits",
     "Maternity",
-    "Event",
+    "Newborn",
+    "Kids",
     "Other",
 ];
 
@@ -26,9 +25,9 @@ const steps = [
 ];
 
 const inputClass =
-    "w-full border border-[#d6cec6] bg-white/60 px-4 py-3 text-base text-[#1d1a19] placeholder:text-[#8f8983] outline-none transition-colors focus:border-[#1d1a19]";
+    "theme-field w-full border px-4 py-3 text-base outline-none transition-colors focus:border-clay";
 const labelClass =
-    "mb-2 block text-xs uppercase tracking-[0.15em] text-[#6f6963]";
+    "theme-muted mb-2 block text-xs font-bold uppercase tracking-[0.15em]";
 
 export default function ContactSection() {
     const [shootType, setShootType] = useState("");
@@ -50,7 +49,9 @@ export default function ContactSection() {
             "Hello, I'd like to book a shoot.",
             "",
             `Name: ${data.get("name")}`,
+            `Email: ${data.get("email")}`,
             `Shoot type: ${finalShootType}`,
+            data.get("package") ? `Starting package: ${data.get("package")}` : "",
             data.get("date") ? `Date: ${data.get("date")}` : "",
             data.get("location") ? `Location: ${data.get("location")}` : "",
             data.get("message") ? `Note: ${data.get("message")}` : "",
@@ -74,11 +75,11 @@ export default function ContactSection() {
         >
             <h1
                 id="contact-title"
-                className="mb-4 text-[clamp(40px,7vw,64px)] font-light leading-tight tracking-tight text-[#1d1a19]"
+                className="theme-fg mb-4 text-[clamp(40px,7vw,64px)] font-light leading-tight tracking-tight"
             >
                 Book a shoot
             </h1>
-            <p className="mb-8 max-w-md text-base leading-7 text-[#2b2623]">
+            <p className="theme-muted mb-8 max-w-md text-base leading-7">
                 Tell us the date, the place and the kind of shoot. We reply within a
                 day.
             </p>
@@ -96,7 +97,7 @@ export default function ContactSection() {
             {/* Form + details */}
             <div className="grid gap-12 md:grid-cols-[1.3fr_1fr] md:gap-16">
                 <form onSubmit={handleSubmit} className="space-y-5">
-                    <h2 className="text-2xl font-light tracking-tight text-[#1d1a19]">
+                    <h2 className="theme-fg text-2xl font-light tracking-tight">
                         Or fill in the details
                     </h2>
 
@@ -116,6 +117,21 @@ export default function ContactSection() {
                     </div>
 
                     <div>
+                        <label htmlFor="email" className={labelClass}>
+                            Email address
+                        </label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            autoComplete="email"
+                            placeholder="you@example.com"
+                            className={inputClass}
+                        />
+                    </div>
+
+                    <div>
                         <span className={labelClass}>Type of shoot</span>
                         <div className="flex flex-wrap gap-2">
                             {shootTypes.map((type) => (
@@ -126,7 +142,7 @@ export default function ContactSection() {
                                     aria-pressed={shootType === type}
                                     className={`border px-4 py-2 text-sm transition-colors cursor-pointer ${shootType === type
                                         ? "border-[#6b1423] bg-[#6b1423] text-white"
-                                        : "border-[#d6cec6] text-[#1d1a19] hover:border-[#1d1a19]"
+                                        : "theme-border theme-fg border hover:border-ink"
                                         }`}
                                 >
                                     {type}
@@ -134,6 +150,28 @@ export default function ContactSection() {
                             ))}
                         </div>
                         <input type="hidden" name="shootType" value={shootType} required />
+                    </div>
+
+                    <div>
+                        <label htmlFor="package" className={labelClass}>
+                            Starting price package
+                        </label>
+                        <select
+                            id="package"
+                            name="package"
+                            defaultValue=""
+                            className={`${inputClass} cursor-pointer`}
+                        >
+                            <option value="">Choose a package</option>
+                            {photographyPackages.map((item, index) => {
+                                const option = formatPackageOption(item);
+                                return (
+                                    <option key={`${option}-${index}`} value={option}>
+                                        {option}
+                                    </option>
+                                );
+                            })}
+                        </select>
                     </div>
 
                     {/* Conditional Input for "Other" shoot type */}
@@ -149,7 +187,7 @@ export default function ContactSection() {
                                 required
                                 value={customShootType}
                                 onChange={(e) => setCustomShootType(e.target.value)}
-                                placeholder="e.g. Graduation, Commercial, Portrait"
+                                placeholder="e.g. Newborn, Portrait"
                                 className={inputClass}
                             />
                         </div>
@@ -198,7 +236,7 @@ export default function ContactSection() {
                         Send on WhatsApp
                     </button>
                     {!shootType && (
-                        <p className="text-xs text-[#8f8983]">
+                        <p className="theme-muted text-xs">
                             Pick a type of shoot to continue.
                         </p>
                     )}
@@ -206,10 +244,10 @@ export default function ContactSection() {
 
                 <aside className="space-y-8 md:pt-12">
                     <div>
-                        <h2 className="mb-4 text-xs uppercase tracking-[0.15em] text-[#6f6963]">
+                        <h2 className="theme-muted mb-4 text-xs uppercase tracking-[0.15em]">
                             Reach us directly
                         </h2>
-                        <ul className="space-y-4 text-[15px] text-[#1d1a19]">
+                        <ul className="theme-fg space-y-4 text-[15px]">
                             <li className="flex items-start gap-3">
                                 <FaWhatsapp className="mt-1 shrink-0" aria-hidden="true" />
                                 <span>{WHATSAPP_DISPLAY}</span>
@@ -224,26 +262,26 @@ export default function ContactSection() {
                             </li>
                         </ul>
                     </div>
-                    <p className="border-l-2 border-[#6b1423] pl-4 text-sm leading-6 text-[#514b46]">
+                    <p className="theme-muted border-l-2 border-clay pl-4 text-sm leading-6">
                         We reply to every message within a day.
                     </p>
                 </aside>
             </div>
 
-            <div className="mt-16 border-t border-[#d6cec6] pt-10 md:mt-24">
-                <h2 className="mb-8 text-xs uppercase tracking-[0.15em] text-[#6f6963]">
+            <div className="theme-border mt-16 border-t pt-10 md:mt-24">
+                <h2 className="theme-muted mb-8  uppercase tracking-[0.15em]">
                     What happens next
                 </h2>
                 <ol className="grid gap-8 md:grid-cols-3">
                     {steps.map((step, i) => (
                         <li key={step.title}>
-                            <span className="mb-2 block text-sm text-[#6b1423]">
+                            <span className="mb-2 block text-sm text-clay">
                                 0{i + 1}
                             </span>
-                            <h3 className="mb-1 text-lg font-medium text-[#1d1a19]">
+                            <h3 className="theme-fg mb-1 text-lg font-medium">
                                 {step.title}
                             </h3>
-                            <p className="text-[15px] leading-6 text-[#514b46]">
+                            <p className="theme-muted text-[15px] leading-6">
                                 {step.text}
                             </p>
                         </li>

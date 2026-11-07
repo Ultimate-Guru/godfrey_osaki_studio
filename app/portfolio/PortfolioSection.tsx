@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-type Category = "Male" | "Female" | "Graduation" | "Marriage" | "Maternity" | "Family";
+type Category = "Wedding" | "Portrait" | "Baby Bump";
 
 type Photo = {
     category: Category;
@@ -11,35 +11,60 @@ type Photo = {
     alt: string;
 };
 
-const filters = ["All", "Male", "Female", "Graduation", "Marriage", "Maternity", "Family"] as const;
+const filters = ["All", "Portrait", "Baby Bump", "Wedding"] as const;
 type Filter = (typeof filters)[number];
 
-// Map each category to its exact folder name inside public/
-const folderMap: Record<Category, string> = {
-    Male: "male",
-    Female: "female",
-    Graduation: "graduation",
-    Marriage: "marriage",
-    Maternity: "maternity",
-    Family: "family",
-};
-
 const library: Record<Category, string[]> = {
-    Male: ["boy_1.jpg", "boy_2.jpg", "boy_3.jpg", "boy_4.jpg", "boy_5.jpg", "boy_6.jpg"],
-    Female: ["girl_1.jpg", "girl_2.jpg", "girl_3.jpg", "girl_4.jpg", "girl_5.jpg", "girl_6.jpg"],
-    Graduation: ["grad_1.jpg", "grad_2.jpg", "grad_3.jpg", "grad_4.jpg", "grad_5.jpg", "grad_6.jpg"],
-    Marriage: ["marry.jpg", "marry_1.jpg", "marry_2.jpg", "marry_3.jpg", "marry_4.jpg", "marry_5.jpg"],
-    Maternity: ["maternity_1.jpg", "maternity_2.jpg", "maternity_3.jpg", "maternity_4.jpg", "maternity_5.jpg", "maternity_6.jpg"],
-    Family: ["family_2.jpg", "family.jpg", "family_4.jpg", "family_3.jpg", "family_5.jpg", "family_1.jpg"],
+    Portrait: [
+        "/male/boy_1.jpg",
+        "/male/boy_2.jpg",
+        "/male/boy_3.jpg",
+        "/male/boy_4.jpg",
+        "/male/boy_5.jpg",
+        "/male/boy_6.jpg",
+        "/female/girl_1.jpg",
+        "/female/girl_2.jpg",
+        "/female/girl_3.jpg",
+        "/female/girl_4.jpg",
+        "/female/girl_5.jpg",
+        "/female/girl_6.jpg",
+        "/graduation/grad_1.jpg",
+        "/graduation/grad_2.jpg",
+        "/graduation/grad_3.jpg",
+        "/graduation/grad_4.jpg",
+        "/graduation/grad_5.jpg",
+        "/graduation/grad_6.jpg",
+        "/family/family_2.jpg",
+        "/family/family.jpg",
+        "/family/family_4.jpg",
+        "/family/family_3.jpg",
+        "/family/family_5.jpg",
+        "/family/family_1.jpg",
+    ],
+    Wedding: [
+        "/marriage/marry.jpg",
+        "/marriage/marry_1.jpg",
+        "/marriage/marry_2.jpg",
+        "/marriage/marry_3.jpg",
+        "/marriage/marry_4.jpg",
+        "/marriage/marry_5.jpg",
+    ],
+    "Baby Bump": [
+        "/maternity/maternity_1.jpg",
+        "/maternity/maternity_2.jpg",
+        "/maternity/maternity_3.jpg",
+        "/maternity/maternity_4.jpg",
+        "/maternity/maternity_5.jpg",
+        "/maternity/maternity_6.jpg",
+    ],
 };
 
-const photos: Photo[] = (Object.keys(library) as Category[]).flatMap(
-    (category) =>
-        library[category].map((file, i) => ({
-            category,
-            src: `/${folderMap[category]}/${file}`,
-            alt: `${category} photo ${i + 1} by Godfrey Osaki Studios`,
-        })),
+const photos: Photo[] = (Object.keys(library) as Category[]).flatMap((category) =>
+    library[category].map((src, index) => ({
+        category,
+        src,
+        alt: `${category} photo ${index + 1} by Godfrey Osaki Studios`,
+    })),
 );
 
 export default function PortfolioSection() {
@@ -78,16 +103,16 @@ export default function PortfolioSection() {
             aria-labelledby="archive-title"
             className="px-[6vw] pb-20 pt-20 md:px-[3.2vw] md:pb-28 md:pt-20"
         >
-            <p className="mb-5 text-xs uppercase tracking-[0.18em] text-[#6b1423]">
+            <p className="mb-5 text-xs uppercase tracking-[0.18em] text-clay">
                 The archive / 03
             </p>
             <h1
                 id="archive-title"
-                className="mb-6 max-w-2xl text-[clamp(44px,8vw,88px)] font-medium leading-[0.95] tracking-[-0.06em] text-[#1d1a19]"
+                className="theme-fg mb-6 max-w-2xl text-[clamp(44px,8vw,88px)] font-medium leading-[0.95] tracking-[-0.06em]"
             >
                 Scenes worth returning to.
             </h1>
-            <p className="mb-10 max-w-md text-[15px] leading-7 text-[#6f6963]">
+            <p className="theme-muted mb-10 max-w-md text-[15px] leading-7">
                 A living index of all the ordinary and extraordinary moments we have
                 been trusted to witness.
             </p>
@@ -105,8 +130,8 @@ export default function PortfolioSection() {
                         onClick={() => setActive(filter)}
                         aria-pressed={active === filter}
                         className={`cursor-pointer border-b pb-1.5 text-xs uppercase tracking-[0.15em] transition-colors ${active === filter
-                            ? "border-[#1d1a19] text-[#6b1423]"
-                            : "border-transparent text-[#8f8983] hover:text-[#1d1a19]"
+                            ? "border-clay text-clay"
+                            : "border-transparent theme-muted hover:text-ink"
                             }`}
                     >
                         {filter}
@@ -114,7 +139,7 @@ export default function PortfolioSection() {
                 ))}
             </div>
 
-            <p className="mb-8 text-[11px] uppercase tracking-[0.15em] text-[#8f8983]">
+            <p className="theme-muted mb-8 text-[11px] uppercase tracking-[0.15em]">
                 Select an image to enter its story
             </p>
 
@@ -125,7 +150,7 @@ export default function PortfolioSection() {
                         <button
                             type="button"
                             onClick={() => setOpenIndex(index)}
-                            className="group relative block aspect-[0.8] w-full cursor-pointer overflow-hidden bg-[#e8d8c6]"
+                            className="theme-surface group relative block aspect-[0.8] w-full cursor-pointer overflow-hidden"
                             aria-label={`Open ${photo.alt}`}
                         >
                             <Image
