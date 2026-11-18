@@ -152,6 +152,25 @@ export default function ContactSection() {
                         <input type="hidden" name="shootType" value={shootType} required />
                     </div>
 
+                    {/* Conditional Input for "Other" shoot type */}
+                    {shootType === "Other" && (
+                        <div className="pt-1">
+                            <label htmlFor="customShootType" className={labelClass}>
+                                Specify shoot type
+                            </label>
+                            <input
+                                id="customShootType"
+                                name="customShootType"
+                                type="text"
+                                required
+                                value={customShootType}
+                                onChange={(e) => setCustomShootType(e.target.value)}
+                                placeholder="e.g. Newborn, Portrait"
+                                className={inputClass}
+                            />
+                        </div>
+                    )}
+
                     <div>
                         <label htmlFor="package" className={labelClass}>
                             Starting price package
@@ -173,25 +192,6 @@ export default function ContactSection() {
                             })}
                         </select>
                     </div>
-
-                    {/* Conditional Input for "Other" shoot type */}
-                    {shootType === "Other" && (
-                        <div className="pt-1">
-                            <label htmlFor="customShootType" className={labelClass}>
-                                Specify shoot type
-                            </label>
-                            <input
-                                id="customShootType"
-                                name="customShootType"
-                                type="text"
-                                required
-                                value={customShootType}
-                                onChange={(e) => setCustomShootType(e.target.value)}
-                                placeholder="e.g. Newborn, Portrait"
-                                className={inputClass}
-                            />
-                        </div>
-                    )}
 
                     <div className="grid gap-5 sm:grid-cols-2">
                         <div>
