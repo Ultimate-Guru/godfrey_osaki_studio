@@ -30,11 +30,10 @@ export default function HeroSection() {
           </p>
           <h1
             id="hero-title"
-            className="max-w-5xl font-serif text-[clamp(4.5rem,12vw,11rem)] font-normal leading-[0.78] tracking-[-0.075em]"
-          >
+            className="max-w-5xl text-[clamp(4.5rem,12vw,11rem)] font-normal leading-[0.80] tracking-[-0.075em]">
             Memories
             <br />
-            in a <span className="italic text-sand">frame.</span>
+            in a <span className="italic font-serif text-sand">frame.</span>
           </h1>
         </div>
 

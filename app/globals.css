@@ -18,6 +18,8 @@
   --site-border: #e8e1da;
   --site-surface: #eee8e0;
   --site-field: #ffffff;
+  --scrollbar-thumb: #9f4b49;
+  --scrollbar-thumb-hover: #7f3736;
 }
 
 :root[data-theme="dark"] {
@@ -28,6 +30,8 @@
   --site-border: #3d3833;
   --site-surface: #24211e;
   --site-field: #24211e;
+  --scrollbar-thumb: #c9827d;
+  --scrollbar-thumb-hover: #e0a19b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,6 +43,8 @@
     --site-border: #3d3833;
     --site-surface: #24211e;
     --site-field: #24211e;
+    --scrollbar-thumb: #c9827d;
+    --scrollbar-thumb-hover: #e0a19b;
   }
 }
 
@@ -46,9 +52,31 @@ html,
 body {
   background-color: var(--site-bg);
   color: var(--site-fg);
+  scrollbar-color: var(--scrollbar-thumb) var(--site-surface);
+  scrollbar-width: thin;
   transition:
     background-color 200ms ease,
     color 200ms ease;
+}
+
+/* Compact themed scrollbars in Chromium and Safari. */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--site-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border: 2px solid var(--site-surface);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 .theme-bg {
