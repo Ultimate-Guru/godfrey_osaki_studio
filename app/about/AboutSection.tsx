@@ -26,12 +26,14 @@ export default function AboutSection() {
                     The faces behind the pictures
                 </h1>
 
-                <p className="theme-muted mb-5 text-[15px] leading-7">
-                    We are Emmanuel and Onella, the couple photographers side by side for just as long. 
+                <p className="theme-muted mb-5 leading-7">
+                    We are Emmanuel and Onella, the lead photographers at {" "}
+                    <span className="font-bold text-black">GODFREY OSAKI STUDIOS</span>.
+                    We are a couple photographers side by side for just as long.
                     Working as a team means you get two sets of eyes on every moment.
                 </p>
-                <p className="theme-muted mb-8 text-[15px] leading-7">
-                    For us, a photograph is more than a good image. It is a moment that lasts. 
+                <p className="theme-muted mb-8 leading-7">
+                    For us, a photograph is more than a good image. It is a moment that lasts.
                     We take time to know you, so the people in the frame look like
                     themselves, relaxed and smiling.
                 </p>
