@@ -47,7 +47,7 @@ export default function PricingSection({
                     src={item.image}
                     alt={`${item.name} photography`}
                     fill
-                    quality={100}
+                    quality={95}
                     sizes="(max-width: 768px) 88vw, 45vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                   />

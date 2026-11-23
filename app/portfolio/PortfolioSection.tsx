@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { GalleryId, PhotographyPackage } from "@/components/pricing-data";
 
@@ -156,30 +156,63 @@ export default function PortfolioSection({
     activePackage: PhotographyPackage;
 }) {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const dialogRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement | null>(null);
 
     const visible = photos.filter((photo) =>
         photo.galleryIds.includes(activePackage.galleryId),
     );
 
-    // Keyboard controls for the popup: Esc closes, arrows move
+    // Keep keyboard focus inside the popup, restore it when closed, and lock the page scroll.
     useEffect(() => {
         if (openIndex === null) return;
 
+        const dialog = dialogRef.current;
+        const previousOverflow = document.body.style.overflow;
+        const focusableSelector =
+            'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
         const onKey = (e: KeyboardEvent) => {
-            if (e.key === "Escape") setOpenIndex(null);
-            if (e.key === "ArrowRight")
+            if (e.key === "Escape") {
+                e.preventDefault();
+                setOpenIndex(null);
+            }
+            if (e.key === "ArrowRight") {
+                e.preventDefault();
                 setOpenIndex((i) => (i === null ? i : (i + 1) % visible.length));
-            if (e.key === "ArrowLeft")
+            }
+            if (e.key === "ArrowLeft") {
+                e.preventDefault();
                 setOpenIndex((i) =>
                     i === null ? i : (i - 1 + visible.length) % visible.length,
                 );
+            }
+            if (e.key === "Tab" && dialog) {
+                const focusable = Array.from(
+                    dialog.querySelectorAll<HTMLElement>(focusableSelector),
+                );
+                const first = focusable[0];
+                const last = focusable.at(-1);
+
+                if (!first || !last) {
+                    e.preventDefault();
+                } else if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
         };
 
+        dialog?.querySelector<HTMLElement>("[data-dialog-close]")?.focus();
         document.body.style.overflow = "hidden";
         window.addEventListener("keydown", onKey);
         return () => {
-            document.body.style.overflow = "";
+            document.body.style.overflow = previousOverflow;
             window.removeEventListener("keydown", onKey);
+            triggerRef.current?.focus();
         };
     }, [openIndex, visible.length]);
 
@@ -222,7 +255,10 @@ export default function PortfolioSection({
                     <li key={photo.src}>
                         <button
                             type="button"
-                            onClick={() => setOpenIndex(index)}
+                            onClick={(event) => {
+                                triggerRef.current = event.currentTarget;
+                                setOpenIndex(index);
+                            }}
                             className="theme-surface group relative block aspect-[0.8] w-full cursor-pointer overflow-hidden"
                             aria-label={`Open ${photo.alt}`}
                         >
@@ -249,11 +285,18 @@ export default function PortfolioSection({
                     role="dialog"
                     aria-modal="true"
                     aria-label={current.alt}
+                    aria-describedby="gallery-viewer-instructions"
+                    ref={dialogRef}
+                    tabIndex={-1}
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
                     onClick={() => setOpenIndex(null)}
                 >
+                    <p id="gallery-viewer-instructions" className="sr-only">
+                        Use the left and right arrow keys to browse images. Press Escape to close.
+                    </p>
                     <button
                         type="button"
+                        data-dialog-close
                         onClick={() => setOpenIndex(null)}
                         className="absolute right-5 top-5 text-sm uppercase tracking-[0.15em] text-white cursor-pointer"
                     >

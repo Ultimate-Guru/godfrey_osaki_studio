@@ -117,8 +117,6 @@ export default function Footer() {
 
             <Link
               href="/contact"
-              target="_blank"
-              rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-[#e3ddd5] transition-colors duration-300 hover:text-clay"
             >
               Enquire about a session

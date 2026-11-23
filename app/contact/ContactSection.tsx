@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaWhatsapp } from "react-icons/fa";
 import { formatPackageOption, photographyPackages } from "@/components/pricing-data";
 
 const WHATSAPP_NUMBER = "2349038829347";
@@ -32,6 +32,18 @@ const labelClass =
 export default function ContactSection() {
     const [shootType, setShootType] = useState("");
     const [customShootType, setCustomShootType] = useState("");
+    const dateInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        const now = new Date();
+        const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60_000)
+            .toISOString()
+            .slice(0, 10);
+
+        if (dateInputRef.current) {
+            dateInputRef.current.min = localDate;
+        }
+    }, []);
 
     const baseMessage = "Hello, my name is [Your Name]. I'd like to book a shoot.";
 
@@ -198,7 +210,13 @@ export default function ContactSection() {
                             <label htmlFor="date" className={labelClass}>
                                 Preferred date
                             </label>
-                            <input id="date" name="date" type="date" className={inputClass} />
+                            <input
+                                id="date"
+                                name="date"
+                                type="date"
+                                ref={dateInputRef}
+                                className={inputClass}
+                            />
                         </div>
                         <div>
                             <label htmlFor="location" className={labelClass}>
@@ -223,7 +241,7 @@ export default function ContactSection() {
                             name="message"
                             rows={4}
                             placeholder="Tell us about the day you have in mind"
-                            className={inputClass}
+                            className={`${inputClass} min-h-32 max-h-48 resize-y`}
                         />
                     </div>
 
@@ -249,12 +267,22 @@ export default function ContactSection() {
                         </h2>
                         <ul className="theme-fg space-y-4 text-[15px]">
                             <li className="flex items-start gap-3">
-                                <FaWhatsapp className="mt-1 shrink-0" aria-hidden="true" />
-                                <span>{WHATSAPP_DISPLAY}</span>
+                                <FaPhone className="mt-1 shrink-0" aria-hidden="true" />
+                                <a
+                                    href={`tel:+${WHATSAPP_NUMBER}`}
+                                    className="hover:text-clay focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clay"
+                                >
+                                    {WHATSAPP_DISPLAY}
+                                </a>
                             </li>
                             <li className="flex items-start gap-3">
                                 <FaEnvelope className="mt-1 shrink-0" aria-hidden="true" />
-                                <span>{EMAIL}</span>
+                                <a
+                                    href={`mailto:${EMAIL}`}
+                                    className="hover:text-clay focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clay"
+                                >
+                                    {EMAIL}
+                                </a>
                             </li>
                             <li className="flex items-start gap-3">
                                 <FaMapMarkerAlt className="mt-1 shrink-0" aria-hidden="true" />

@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import Script from "next/script";
-import { Syne } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const syne = localFont({
   variable: "--font-syne",
-  subsets: ["latin"],
+  display: "swap",
+  src: [
+    { path: "./fonts/Syne-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/Syne-Semibold.ttf", weight: "600", style: "normal" },
+    { path: "./fonts/Syne-Bold.ttf", weight: "700", style: "normal" },
+    { path: "./fonts/Syne-Extrabold.ttf", weight: "800", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {
