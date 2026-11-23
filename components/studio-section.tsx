@@ -3,10 +3,9 @@ import Link from "next/link";
 
 const stories = [
   {
-    title: "Wedding stories",
+    title: "Wedding Stories",
     note: "The beginning of everything",
-    description:
-      "A celebration told through joyful gatherings, quiet glances, and the moments shared between two families.",
+    description: "A celebration told through joyful gatherings, quiet glances, and the moments shared between two families.",
     image: "/marry.jpg",
     alt: "A couple celebrating their marriage",
     layout: "md:col-span-7 md:row-span-2",
@@ -15,9 +14,8 @@ const stories = [
   {
     title: "Portraits",
     note: "A little more like you",
-    description:
-      "A considered portrait that brings personality, style, and presence into focus.",
-    image: "/female/girl_4.jpg",
+    description: "A considered portrait that brings personality, style, and presence into focus.",
+    image: "/lady.jpg",
     alt: "A portrait from the Godfrey Osaki Studios archive",
     layout: "md:col-span-5",
     ratio: "aspect-[1.25]",
@@ -25,8 +23,7 @@ const stories = [
   {
     title: "Maternity",
     note: "A new chapter, beautifully told",
-    description:
-      "A tender pause before a new arrival, capturing the anticipation of a growing family.",
+    description: "A tender pause before a new arrival, capturing the anticipation of a growing family.",
     image: "/maternity/maternity_4.jpg",
     alt: "A maternity portrait by Godfrey Osaki Studios",
     layout: "md:col-span-5",
@@ -37,12 +34,10 @@ const stories = [
 export default function StudioSection() {
   return (
     <>
-
       <section
         aria-labelledby="studio-title"
         className="theme-surface grid gap-10 px-[6vw] py-16 md:grid-cols-[1fr_0.85fr] md:items-center md:gap-16 md:px-[10vw] md:py-24"
-        id="about"
-      >
+        id="about">
         <div className="max-w-xl">
           <p className="mb-5 text-xs uppercase tracking-[0.22em] text-clay">
             The people behind the pictures / 02

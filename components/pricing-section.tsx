@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { photographyPackages } from "./pricing-data";
 
 type PricingSectionProps = {
@@ -54,9 +55,14 @@ export default function PricingSection({
                     aria-hidden="true"
                     className="absolute inset-0 bg-linear-to-t from-black/90 via-black/15 to-transparent"
                   />
+                  <Link
+                    href={`/portfolio/${item.galleryId}`}
+                    aria-label={`View the ${item.name}${item.subtitle ? ` (${item.subtitle})` : ""} gallery`}
+                    className="absolute inset-0 z-10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  />
                 </>
               )}
-              <div className={showDescriptions ? "absolute inset-x-0 bottom-0 p-5 text-white md:p-6" : "contents"}>
+              <div className={showDescriptions ? "pointer-events-none absolute inset-x-0 bottom-0 z-20 p-5 text-white md:p-6" : "contents"}>
                 <div>
                   <h3 className={`${showDescriptions ? "text-white" : "theme-fg"} text-base font-medium md:text-lg`}>
                     {item.name}

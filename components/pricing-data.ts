@@ -1,7 +1,22 @@
+export const galleryIds = [
+  "solo-portrait",
+  "lovers",
+  "milestone",
+  "before-arrival",
+  "first-days",
+  "growing-years",
+  "legacy",
+  "heritage",
+  "wedding-experience",
+] as const;
+
+export type GalleryId = (typeof galleryIds)[number];
+
 export type PhotographyPackage = {
   name: string;
   subtitle?: string;
   ageRange?: string;
+  galleryId: GalleryId;
   price: number;
   description: string;
   image: string;
@@ -10,6 +25,7 @@ export type PhotographyPackage = {
 export const photographyPackages: PhotographyPackage[] = [
   {
     name: "Solo Portrait",
+    galleryId: "solo-portrait",
     price: 100_000,
     image: "/Solo%20Portrait.jpg",
     description:
@@ -17,6 +33,7 @@ export const photographyPackages: PhotographyPackage[] = [
   },
   {
     name: "The Lovers",
+    galleryId: "lovers",
     price: 150_000,
     image: "/The%20Lovers.jpg",
     description:
@@ -24,6 +41,7 @@ export const photographyPackages: PhotographyPackage[] = [
   },
   {
     name: "The Milestone",
+    galleryId: "milestone",
     price: 80_000,
     image: "/The%20Milestone.jpg",
     description:
@@ -31,6 +49,7 @@ export const photographyPackages: PhotographyPackage[] = [
   },
   {
     name: "Before Arrival",
+    galleryId: "before-arrival",
     price: 120_000,
     image: "/Before%20Arrival.jpg",
     description:
@@ -39,6 +58,7 @@ export const photographyPackages: PhotographyPackage[] = [
   {
     name: "The First Days",
     ageRange: "0–2 years",
+    galleryId: "first-days",
     price: 120_000,
     image: "/The%20First%20Days.jpg",
     description:
@@ -47,6 +67,7 @@ export const photographyPackages: PhotographyPackage[] = [
   {
     name: "The Growing Years",
     ageRange: "3–12 years",
+    galleryId: "growing-years",
     price: 80_000,
     image: "/The%20Growing%20Years.jpg",
     description:
@@ -55,6 +76,7 @@ export const photographyPackages: PhotographyPackage[] = [
   {
     name: "The Heritage",
     subtitle: "Family",
+    galleryId: "heritage",
     price: 200_000,
     image: "/Heritage.jpg",
     description:
@@ -63,28 +85,25 @@ export const photographyPackages: PhotographyPackage[] = [
   {
     name: "The Legacy",
     ageRange: "65 years and above",
+    galleryId: "legacy",
     price: 80_000,
     image: "/The%20Legacy.jpg",
     description:
       "A refined portrait experience created to honor a life of wisdom, strength, and legacy; captured with dignity, depth, and timeless elegance.",
   },
   {
-    name: "Wedding",
-    subtitle: "Digital experience",
-    price: 750_000,
-    image: "/wedding%28digital%29.jpg",
-    description:
-      "Perfect for couples who prefer a sleek, modern, and digital experience. All photos are professionally edited and delivered digitally - ready to share, or treasure forever.",
-  },
-  {
-    name: "Wedding",
-    subtitle: "Hybrid",
+    name: "Wedding Experience",
+    galleryId: "wedding-experience",
     price: 950_000,
     image: "/wed.jpg",
     description:
-      "Perfect for couples who prefer a blend of physical and digital memories. All photos are professionally edited and delivered both digitally and physically.",
+      "Perfect for couples who prefer a sleek, modern, and digital experience. All photos are professionally edited and delivered digitally - ready to share, or treasure forever.",
   },
 ];
+
+export function getPhotographyPackageByGalleryId(galleryId: string) {
+  return photographyPackages.find((item) => item.galleryId === galleryId);
+}
 
 export function formatNaira(amount: number) {
   return `₦${amount.toLocaleString("en-NG")}`;
@@ -94,5 +113,5 @@ export function formatPackageOption(item: PhotographyPackage) {
   const detail = item.subtitle ?? item.ageRange;
   const name = detail ? `${item.name} (${detail})` : item.name;
 
-  return `${name} — from ${formatNaira(item.price)}`;
+  return `${name} from ${formatNaira(item.price)}`;
 }

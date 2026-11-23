@@ -67,11 +67,6 @@ export default function Footer() {
                 priority
               />
             </Link>
-
-            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#e3ddd5]">
-              Lagos, Nigeria <span className="mx-2 text-[#e3ddd5]">/</span>
-              Est. 2020
-            </p>
           </div>
 
           {/* Navigation */}
@@ -139,7 +134,7 @@ export default function Footer() {
           </p>
 
           <p className="text-sm font-medium leading-6 text-[#e3ddd5]">
-            Designed by{" "}
+            Built by{" "}
             <Link
               href="https://oluwatosindaniel.vercel.app/"
               target="_blank"

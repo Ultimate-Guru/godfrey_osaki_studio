@@ -2,77 +2,164 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-type Category = "Wedding" | "Portrait" | "Baby Bump";
+import Link from "next/link";
+import type { GalleryId, PhotographyPackage } from "@/components/pricing-data";
 
 type Photo = {
-    category: Category;
+    galleryIds: GalleryId[];
     src: string;
     alt: string;
 };
 
-const filters = ["All", "Portrait", "Baby Bump", "Wedding"] as const;
-type Filter = (typeof filters)[number];
-
-const library: Record<Category, string[]> = {
-    Portrait: [
-        "/male/boy_1.jpg",
-        "/male/boy_2.jpg",
-        "/male/boy_3.jpg",
-        "/male/boy_4.jpg",
-        "/male/boy_5.jpg",
-        "/male/boy_6.jpg",
-        "/female/girl_1.jpg",
-        "/female/girl_2.jpg",
-        "/female/girl_3.jpg",
-        "/female/girl_4.jpg",
-        "/female/girl_5.jpg",
-        "/female/girl_6.jpg",
+const library: Record<GalleryId, string[]> = {
+    "solo-portrait": [
+        "/portrait/solo.jpg",
+        "/portrait/solo_1.jpg",
+        "/portrait/solo_2.jpg",
+        "/portrait/solo-3.jpg",
+        "/portrait/solo_4.jpg",
+        "/portrait/solo_5.jpg",
+        "/portrait/solo_6.jpg",
+        "/portrait/solo_7.jpg",
+        "/portrait/solo_8.jpg",
+        "/portrait/solo_9.jpg",
+        "/portrait/solo_10.jpg",
+        "/portrait/solo_11.jpg",
+    ],
+    lovers: [
+        "/lovers/lovers_1.jpg",
+        "/lovers/lovers-2.jpg",
+        "/lovers/lovers_3.jpg",
+        "/lovers/lovers_4.jpg",
+        "/lovers/lovers_5.jpg",
+        "/lovers/lovers_6.jpg",
+        "/lovers/lovers_7.jpg",
+        "/lovers/lovers_8.jpg",
+        "/lovers/lovers_9.jpg",
+        "/lovers/lovers_10.jpg",
+        "/lovers/lovers_11.jpg",
+        "/lovers/lovers_12.jpg",
+    ],
+    milestone: [
         "/graduation/grad_1.jpg",
         "/graduation/grad_2.jpg",
         "/graduation/grad_3.jpg",
         "/graduation/grad_4.jpg",
         "/graduation/grad_5.jpg",
         "/graduation/grad_6.jpg",
-        "/family/family_2.jpg",
-        "/family/family.jpg",
-        "/family/family_4.jpg",
-        "/family/family_3.jpg",
-        "/family/family_5.jpg",
-        "/family/family_1.jpg",
+        "/graduation/grad_7.jpg",
+        "/graduation/grad_8.jpg",
+        "/graduation/grad_9.jpg",
+        "/graduation/grad_10.jpg",
+        "/graduation/grad_11.jpg",
+        "/graduation/grad_12.jpg",
     ],
-    Wedding: [
-        "/marriage/marry.jpg",
-        "/marriage/marry_1.jpg",
-        "/marriage/marry_2.jpg",
-        "/marriage/marry_3.jpg",
-        "/marriage/marry_4.jpg",
-        "/marriage/marry_5.jpg",
-    ],
-    "Baby Bump": [
+    "before-arrival": [
         "/maternity/maternity_1.jpg",
         "/maternity/maternity_2.jpg",
         "/maternity/maternity_3.jpg",
         "/maternity/maternity_4.jpg",
         "/maternity/maternity_5.jpg",
         "/maternity/maternity_6.jpg",
+        "/maternity/maternity_7.jpg",
+        "/maternity/maternity_8.jpg",
+        "/maternity/maternity_9.jpg",
+    ],
+    "first-days": [
+        "/baby/baby.jpg",
+        "/baby/baby_1.jpg",
+        "/baby/baby_2.jpg",
+        "/baby/baby_3.jpg",
+        "/baby/baby_4.jpg",
+        "/baby/baby_5.jpg",
+        "/baby/baby_6.jpg",
+        "/baby/baby_7.jpg",
+        "/baby/last_baby.jpg",
+    ],
+    "growing-years": [
+        "/growing/grow.jpg",
+        "/growing/grow_1.jpg",
+        "/growing/grow_2.jpg",
+        "/growing/grow_3.jpg",
+        "/growing/grow_4.jpg",
+        "/growing/grow_5.jpg",
+        "/growing/grow_6.jpg",
+        "/growing/grow_7.jpg",
+        "/growing/grow_8.jpg",
+        "/growing/grow_9.jpg",
+        "/growing/grow_10.jpg",
+        "/growing/grow_11.jpg",
+    ],
+    legacy: [
+        "/legacy/legacy_7.jpg",
+        "/legacy/legacy-1.jpg",
+        "/legacy/legacy_2.jpg",
+        "/legacy/legacy_3.jpg",
+        "/legacy/legacy_4.jpg",
+        "/legacy/legacy_5.jpg",
+        "/legacy/legacy_6.jpg",
+        "/legacy/legacy-7.jpg",
+        "/legacy/legacy_8.jpg",
+    ],
+    heritage: [
+        "/family/family.jpg",
+        "/family/family_1.jpg",
+        "/family/family_2.jpg",
+        "/family/family_3.jpg",
+        "/family/family_4.jpg",
+        "/family/family_5.jpg",
+        "/family/family_6.jpg",
+        "/family/family_7.jpg",
+        "/family/family_8.jpg",
+        "/family/family_9.jpg",
+        "/family/family_10.jpg",
+        "/family/family_11.jpg",
+    ],
+    "wedding-experience": [
+        "/marriage/marry.jpg",
+        "/marriage/marry_1.jpg",
+        "/marriage/marry_2.jpg",
+        "/marriage/marry_3.jpg",
+        "/marriage/marry_4.jpg",
+        "/marriage/marry_5.jpg",
+        "/marriage/marry_7.jpg",
+        "/marriage/marry_8.jpg",
+        "/marriage/marry_9.jpg",
+        "/marriage/marry_10.jpg",
+        "/marriage/marry_11.jpg",
+        "/marriage/marry-12.jpg",
     ],
 };
 
-const photos: Photo[] = (Object.keys(library) as Category[]).flatMap((category) =>
-    library[category].map((src, index) => ({
-        category,
+const photos: Photo[] = (Object.keys(library) as GalleryId[]).flatMap((galleryId) =>
+    library[galleryId].map((src, index) => ({
+        galleryIds: [galleryId],
         src,
-        alt: `${category} photo ${index + 1} by Godfrey Osaki Studios`,
+        alt: `${galleryId.replaceAll("-", " ")} photo ${index + 1} by Godfrey Osaki Studios`,
     })),
 );
 
-export default function PortfolioSection() {
-    const [active, setActive] = useState<Filter>("All");
+const landscapePhotoSources = new Set([
+    "/marriage/marry_10.jpg",
+    "/marriage/marry_11.jpg",
+    "/marriage/marry-12.jpg",
+    "/family/family.jpg",
+    "/family/family_1.jpg",
+    "/family/family_3.jpg",
+    "/family/family_10.jpg",
+    "/family/family_11.jpg",
+]);
+
+export default function PortfolioSection({
+    activePackage,
+}: {
+    activePackage: PhotographyPackage;
+}) {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    const visible =
-        active === "All" ? photos : photos.filter((p) => p.category === active);
+    const visible = photos.filter((photo) =>
+        photo.galleryIds.includes(activePackage.galleryId),
+    );
 
     // Keyboard controls for the popup: Esc closes, arrows move
     useEffect(() => {
@@ -100,48 +187,34 @@ export default function PortfolioSection() {
 
     return (
         <section
+            id="gallery"
             aria-labelledby="archive-title"
             className="px-[6vw] pb-20 pt-20 md:px-[3.2vw] md:pb-28 md:pt-20"
         >
             <p className="mb-5 text-xs uppercase tracking-[0.18em] text-clay">
-                The archive / 03
+                {activePackage.name} / gallery
             </p>
             <h1
                 id="archive-title"
                 className="theme-fg mb-6 max-w-2xl text-[clamp(44px,8vw,88px)] font-medium leading-[0.95] tracking-[-0.06em]"
             >
-                Scenes worth returning to.
+                {activePackage.name} stories.
             </h1>
             <p className="theme-muted mb-10 max-w-md text-[15px] leading-7">
-                A living index of all the ordinary and extraordinary moments we have
-                been trusted to witness.
+                {activePackage.description}
             </p>
 
-            {/* Filter tabs */}
-            <div
-                role="group"
-                aria-label="Filter photos"
-                className="mb-6 flex flex-wrap gap-x-6 gap-y-3"
-            >
-                {filters.map((filter) => (
-                    <button
-                        key={filter}
-                        type="button"
-                        onClick={() => setActive(filter)}
-                        aria-pressed={active === filter}
-                        className={`cursor-pointer border-b pb-1.5 text-xs uppercase tracking-[0.15em] transition-colors ${active === filter
-                            ? "border-clay text-clay"
-                            : "border-transparent theme-muted hover:text-ink"
-                            }`}
-                    >
-                        {filter}
-                    </button>
-                ))}
+            <div className="mb-8 flex items-center justify-between gap-4">
+                <p className="theme-muted text-[11px] uppercase tracking-[0.15em]">
+                    Select an image to enter its story
+                </p>
+                <Link
+                    href="/portfolio"
+                    className="border-b border-clay pb-1 text-[11px] uppercase tracking-[0.15em] text-clay transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clay"
+                >
+                    All stories
+                </Link>
             </div>
-
-            <p className="theme-muted mb-8 text-[11px] uppercase tracking-[0.15em]">
-                Select an image to enter its story
-            </p>
 
             {/* Photo grid */}
             <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
@@ -158,7 +231,11 @@ export default function PortfolioSection() {
                                 alt={photo.alt}
                                 fill
                                 quality={90}
-                                sizes="(max-width: 768px) 50vw, 33vw"
+                                sizes={
+                                    landscapePhotoSources.has(photo.src)
+                                        ? "(max-width: 768px) 94vw, 62vw"
+                                        : "(max-width: 768px) 50vw, 33vw"
+                                }
                                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                             />
                         </button>

@@ -26,8 +26,7 @@ export default function SiteHeader({ overlay = false }: { overlay?: boolean }) {
                         width={180}
                         height={40}
                         className="h-auto w-36 md:w-45"
-                        priority
-                    />
+                        priority/>
                 ) : (
                     <>
                         <Image

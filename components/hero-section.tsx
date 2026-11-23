@@ -6,8 +6,8 @@ export default function HeroSection() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-170 h-svh max-h-240 flex-col justify-between overflow-hidden bg-ink text-white"
-    >
+      className="relative isolate flex min-h-170 h-svh max-h-240 flex-col justify-between overflow-hidden bg-ink text-white">
+
       <Image
         src="/hero.jpg"
         alt="A girl in a flowing green gown"
@@ -15,8 +15,8 @@ export default function HeroSection() {
         priority
         quality={90}
         sizes="100vw"
-        className="absolute inset-0 -z-20 object-cover object-[55%_center]"
-      />
+        className="absolute inset-0 -z-20 object-cover object-[55%_center]"/>
+
       <div className="absolute inset-0 -z-10 bg-linear-to-b from-black/40 via-black/15 to-black/60" />
 
       <SiteHeader overlay />
