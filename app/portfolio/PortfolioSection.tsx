@@ -140,6 +140,11 @@ const photos: Photo[] = (Object.keys(library) as GalleryId[]).flatMap((galleryId
 );
 
 const landscapePhotoSources = new Set([
+    "/growing/grow_1.jpg",
+    "/growing/grow_2.jpg",
+    "/growing/grow_4.jpg",
+    "/growing/grow_5.jpg",
+    "/growing/grow_7.jpg",
     "/marriage/marry_10.jpg",
     "/marriage/marry_11.jpg",
     "/marriage/marry-12.jpg",

@@ -28,7 +28,7 @@ export default function AboutSection() {
 
                 <p className="theme-muted mb-5 leading-7">
                     We are Emmanuel and Onella, the lead photographers at {" "}
-                    <span className="font-bold text-black">GODFREY OSAKI STUDIOS</span>.
+                    <span className="font-extrabold">GODFREY OSAKI STUDIOS</span>.
                     We are a couple photographers side by side for just as long.
                     Working as a team means you get two sets of eyes on every moment.
                 </p>
